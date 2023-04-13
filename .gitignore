@@ -44,4 +44,5 @@ Thumbs.db
 *.orig
 
 # bcrypt.js
-bcrypt.js
+# bcrypt.js
+nodemailer.js

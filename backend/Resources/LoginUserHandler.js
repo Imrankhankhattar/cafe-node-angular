@@ -8,12 +8,19 @@ class LoginUser {
         let result = await userDao.loginUser(Data);
         if(result.length === 1 ){
             return result[0].status ==='active'?
-            { success: true, message: "User logged in successfully" } : { success: false, message: "User is not active"}
+            { success: true,token : result[0].token ,message: "User logged in successfully" } : { success: false, message: "User is not active"}
         }
         else{
             return { success: false, message: "Incorrect email or password" }
         }
 
+    }
+    async ForgotPassword(Data){
+        let result = await userDao.forgotPassword(Data);
+        return {
+            result
+        }
+        
     }
 }
 module.exports = LoginUser;

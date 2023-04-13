@@ -1,7 +1,9 @@
 const userQueries = require('../queries/user');
 const db = require('../connection');
-let { getHashPassword,getPlainPassword} = require('../bcrypt');
-
+let { getHashPassword,comparePasswords} = require('../bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const nodemailer = require("nodemailer");
 class userDao{
   async addUser(user){
      let hashPassword = await getHashPassword(user.password);
@@ -46,12 +48,27 @@ class userDao{
                 reject(err);
               }
               else{
-                await getHashPassword(user.password) ? resolve(result) : resolve({status: 401, message: "Invalid credentials"})
+                if (await comparePasswords(user.password,result[0].password)) {
+                  const tokenData = {
+                    email: result[0].email,
+                    role: result[0].role
+                  }
+                  const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
+                    expiresIn: 60 * 60 * 24
+                  });
+                  result[0].token = token;
+                  resolve(result);
+                } else {
+                  resolve({status: 401, message: "Invalid credentials"});
+                }
               }
             }
           )
         }
-      )
+      );
+    }
+    async forgotPassword (){
+      
     }
 }
 module.exports = new userDao;
