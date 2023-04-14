@@ -46,3 +46,4 @@ Thumbs.db
 # bcrypt.js
 # bcrypt.js
 nodemailer.js
+*.sql

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-const saltRounds = process.env.SALT_ROUNDS
+const saltRounds = 15
 
 const getHashPassword = (password) => {
     return new Promise((resolve, reject) => {
