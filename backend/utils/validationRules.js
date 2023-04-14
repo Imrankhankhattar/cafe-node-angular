@@ -1,18 +1,37 @@
-const rules = {
-    name: { required: true },
-    email: { required: true, pattern: /^\S+@\S+\.\S+$/ },
+const userRules = {
+    name: { required: true, type: 'string' },
+    email: { required: true, pattern: /^\S+@\S+\.\S+$/, type: 'string' },
     password: { required: true, minLength: 6, type: 'string' },
     status: { type: 'string', allowedValues: ['active', 'inactive'] },
     contact: { type: 'string' },
     role: { type: 'string', allowedValues: ['admin', 'user'] }
 };
-const getValidationRules = (entity) => {
-    for (const key in entity) {
-        if (rules[key]) {
-            entity[key] = rules[key];
-        }
+const updateUserRules = {
+    name: { type: 'string' },
+    email: { required: true, pattern: /^\S+@\S+\.\S+$/, type: 'string' },
+    password: { minLength: 6, type: 'string' },
+    status: { type: 'string', allowedValues: ['active', 'inactive'] },
+    contact: { type: 'string' },
+    role: { type: 'string', allowedValues: ['admin', 'user'] }
+};
+
+const getValidationRules = (type) => {
+    if (type === 'user') {
+        return userRules;
     }
-    return entity;
+}
+const getUpdateValidationRules = (entity, type) => {
+    if (type === 'user') {
+        for (const key in entity) {
+            if (updateUserRules[key]) {
+                entity[key] = updateUserRules[key];
+            }
+        }
+        return entity;
+    }
 }
 
-module.exports = { getValidationRules }
+module.exports = {
+    getValidationRules,
+    getUpdateValidationRules
+}

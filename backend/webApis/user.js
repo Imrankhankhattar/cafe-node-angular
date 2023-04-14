@@ -1,6 +1,6 @@
 var express = require('express');
 const router = express.Router();
-const resources = require('../Resources');
+const resources = require('../Resources/User');
 router.post('/signup', async (req, res) => {
     try {
         const addUser = await new resources.AddUser().handle(req.body);
@@ -26,4 +26,25 @@ router.post('/forgot-password', async (req, res) => {
     catch (err) {
     }
 })
+
+router.post('/update', async (req, res) => {
+    try {
+        const update = await new resources.UpdateUser().handle(req.body);
+        update.success === true ? res.status(200).send(update) : res.status(401).send(update);
+    }
+    catch (err) {
+    }
+})
+
+router.post('/get-users', async (req, res) => {
+    try {
+        const update = await new resources.GetUsers().handle(req.body);
+        update.success === true ? res.status(200).send(update) : res.status(401).send(update);
+    }
+    catch (err) {
+    }
+})
+
+
+
 module.exports = router

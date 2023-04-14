@@ -1,4 +1,4 @@
-const userDao = require('../store/DAOs/userDAO')
+const userDao = require('../../store/DAOs/userDAO')
 
 class LoginUser {
     constructor() {

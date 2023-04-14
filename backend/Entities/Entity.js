@@ -31,7 +31,6 @@ class Entity {
             errors.push(`${key} must be one of ${rule.allowedValues}`);
           }
         }
-      
         return errors.length ? errors : null;
       }
       
