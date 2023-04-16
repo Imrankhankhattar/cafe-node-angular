@@ -14,6 +14,7 @@ class Entity {
           const rule = rules[key];
           if (rule.required && !entity[key]) {
             errors.push(`${key} is required`);
+            continue;
           }
           if (rule.type && typeof entity[key] !== rule.type) {
             errors.push(`${key} must be of type ${rule.type}`);

@@ -19,5 +19,6 @@ class LoginUser {
         let result = await userDao.forgotPassword(Data);
         return result.accepted.length > 0 ? { success: true, message: "Email sent successfully" } : { success: false, message: "Incorrect email" };
     }
+    
 }
 module.exports = LoginUser;

@@ -18,8 +18,9 @@ class userDao {
   async login(user) {
     const userData = await this._getUserWithPassword(user.email);
     if (!userData) {
-      return { message: 'Invalid credentials' };
+      return { message: 'password or email is not correct' };
     }
+    console.log(userData);
     const isValidPassword = await comparePasswords(user.password, userData[0].password);
     if (!isValidPassword) {
       return { message: 'Invalid credentials' };
@@ -54,7 +55,20 @@ class userDao {
     const getUser = this._getUserByEmail(email);
     return getUser;
   }
+  async UpdatePassword(user){
+    let userData =await this._getUserWithPassword(user.email);
+    if(!userData){
+      return {message:'Invalid credentials'}
+    }
+    if(comparePasswords(user.oldPassword,userData[0].password)){
+      let hashPassword = await getHashPassword(user.newPassword);
+      user.password = hashPassword
+      const updatedUser = await this._updatePassword(user);
+      return updatedUser;
+    }
 
+
+  }
   // helper functions
   async _getUserByEmail(email) {
     return new Promise((resolve, reject) => {
