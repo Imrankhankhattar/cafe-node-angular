@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="text-align: center;">
+        Cafe Management
+    </h3>
+    <table>
+        <tr>
+            <th>
+                Name : <%= details.name %>
+            </th>
+            <th>
+                Email : <%= details.email %>
+            </th>
+            
+        </tr>
+        <tr>
+            <th>
+                Contact : <%= details.contact %>
+            </th>
+
+            <th>
+                PaymentMethod : <%= details.paymentMethod %>
+            </th>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>
+                Item
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Total
+            </th>
+        </tr>
+        <% for(var i=0; i<details.items.length; i++){ %>
+            <tr>
+                <td>
+                    <%= details.items[i].name %>
+                </td>
+                <td>
+                    <%= details.items[i].category %>
+                </td>
+                <td>
+                    <%= details.items[i].quantity %>
+                </td>
+                <td>
+                    <%= details.items[i].price %>
+                </td>
+                <td>
+                    <%= details.items[i].total %>
+                </td>
+            </tr>
+            <% } %>
+    </table>
+    <h3>Total: <%= details.totalAmount %></h3>
+            <h3>Thank you for visiting....</h3>
+</body>
+
+</html>
