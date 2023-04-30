@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
 router.post('/forgot-password', async (req, res) => {
     try {
         const forgotPassword = await new resources.LoginUser().ForgotPassword(req.body);
-        forgotPassword.success === true ? res.status(200).send(forgotPassword) : res.status(401).send(forgotPassword);
+        forgotPassword.success === true ? res.status(200).send(forgotPassword) : res.status(409).send(forgotPassword);
     }
     catch (err) {
     }

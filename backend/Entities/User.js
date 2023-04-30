@@ -6,7 +6,7 @@ class User extends Entity {
     this.name = user.name;
     this.email = user.email;
     this.password = user.password;
-    this.status = user.status;
+    this.status = 'inactive';
     this.contact = user.contact;
     this.role = user.role;
   }

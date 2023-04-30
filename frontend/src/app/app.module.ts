@@ -13,16 +13,31 @@ import { SharedModule } from './shared/shared.module';
 import { FullComponent } from './layouts/full/full.component';
 import { AppHeaderComponent } from './layouts/full/header/header.component';
 import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { SignupComponent } from './signup/signup.component';
+import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, PB_DIRECTION } from 'ngx-ui-loader';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  text: "Loading...",
+  textColor: "#FFFFFF",
+  fgsColor: "red",
+  fgsPosition: "center-center",
+  pbColor: "red",
+  fgsType: SPINNER.ballSpinClockwise,
+  pbDirection: PB_DIRECTION.leftToRight,
+  pbThickness: 5
+}
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     HomeComponent,
     BestSellerComponent,
     FullComponent,
     AppHeaderComponent,
-    AppSidebarComponent
-   ],
+    AppSidebarComponent,
+    SignupComponent,
+    ForgotPasswordComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,7 +47,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MaterialModule,
     FlexLayoutModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -31,8 +31,10 @@ class userDao {
   }
   async forgotPassword(user) {
     const userData = await this._getUserByEmail(user.email);
-    if (!userData) {
-      return { message: 'Invalid credentials' };
+    if (userData.length === 0) {
+      return new Promise((resolve,reject)=>{
+        resolve({ status:false,message: 'User not found' })
+      })
     }
     let randomPassword = Math.random().toString(36).slice(-8);
     let hashPassword = await getHashPassword(randomPassword);
@@ -55,12 +57,12 @@ class userDao {
     const getUser = this._getUserByEmail(email);
     return getUser;
   }
-  async UpdatePassword(user){
-    let userData =await this._getUserWithPassword(user.email);
-    if(!userData){
-      return {message:'Invalid credentials'}
+  async UpdatePassword(user) {
+    let userData = await this._getUserWithPassword(user.email);
+    if (!userData) {
+      return { message: 'Invalid credentials' }
     }
-    if(comparePasswords(user.oldPassword,userData[0].password)){
+    if (comparePasswords(user.oldPassword, userData[0].password)) {
       let hashPassword = await getHashPassword(user.newPassword);
       user.password = hashPassword
       const updatedUser = await this._updatePassword(user);
@@ -81,7 +83,7 @@ class userDao {
       });
     });
   }
-  async _getUserWithPassword(email){
+  async _getUserWithPassword(email) {
     return new Promise((resolve, reject) => {
       db.query(userQueries.getUserWithPassword, [email], (err, result) => {
         if (err) {
@@ -164,7 +166,7 @@ class userDao {
           resolve(result);
         }
       });
-    }) 
+    })
   }
   _getUsersByRole(role) {
     return new Promise((resolve, reject) => {
