@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span> <mat-icon>storefront</mat-icon> Cafe Management System</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="loginForm">
+        <div fxFlex fxLayout="column">
+
+            <mat-form-field appearance="fill" fxFlex>
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email" required>
+                <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+                    <span *ngIf="loginForm.controls.email.errors.required">Email is required</span>
+                    <span *ngIf="loginForm.controls.email.errors.pattern">Email is invalid</span>
+                </mat-error>
+                <div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" formControlName="password" required type="password">
+                <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                    <span *ngIf="loginForm.controls.password.errors.required">Password is required</span>
+                    <span *ngIf="loginForm.controls.password.errors.pattern">Password is invalid</span>
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button color="primary" [mat-dialog-close]="loginForm.value" cdkFocusInitial (click)="handleSubmit()">Login</button>
+</mat-dialog-actions>

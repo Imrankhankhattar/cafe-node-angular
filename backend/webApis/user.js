@@ -55,6 +55,16 @@ router.post('/update-password', async (req, res) => {
     catch (err) {
     }
 })
+router.post('/validate-token', async (req, res) => {
+    try {
+        const update = await new resources.UpdateUser().validateToken(req.body);
+        update.success === true ? res.status(200).send(update) : res.status(401).send(update);
+    }
+    catch (err) {
+        console.log(err);
+    }
+})
+
 
 
 module.exports = router

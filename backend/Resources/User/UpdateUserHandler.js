@@ -24,5 +24,15 @@ class UpdateUser {
         let result = await userDao.UpdatePassword(Data);
         return result.affectedRows === 1 ? { success: true, message: "Password updated successfully" } : { success: false, message: "Incorrect email or token" };
     }
+    async validateToken(Data){
+        if(Data.token && typeof Data.token === 'string'){
+            let result = await userDao.validateToken(Data.token);
+            return result
+        }
+        return{
+            status :false,
+            message:"invalid Token"
+        }
+    }
 }
 module.exports = UpdateUser;

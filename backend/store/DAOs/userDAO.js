@@ -20,12 +20,11 @@ class userDao {
     if (!userData) {
       return { message: 'password or email is not correct' };
     }
-    console.log(userData);
     const isValidPassword = await comparePasswords(user.password, userData[0].password);
     if (!isValidPassword) {
       return { message: 'Invalid credentials' };
     }
-    const token = this._generateToken(userData.email, userData.role);
+    const token = this._generateToken(userData[0].email, userData[0].role);
     userData[0].token = token;
     return userData;
   }
@@ -71,6 +70,15 @@ class userDao {
 
 
   }
+  async validateToken(token) {
+    try {
+    let result = await this._getTokenPayload(token)
+      return result
+    } catch (error) {
+      return error
+    }
+  }
+  
   // helper functions
   async _getUserByEmail(email) {
     return new Promise((resolve, reject) => {
@@ -99,16 +107,22 @@ class userDao {
       email: email,
       role: role
     }
-    return jwt.sign(tokenData, process.env.JWT_SECRET, {
-      expiresIn: 60 * 60 * 24
-    });
+    try {
+      return jwt.sign(tokenData, process.env.JWT_SECRET, {
+        expiresIn: 60 * 60 * 24
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
+  
   async _checkEmailUniqueness(email) {
     return new Promise((resolve, reject) => {
       db.query(userQueries.checkUniqueEmail, [email], (err, result) => {
         if (err) {
           reject(err);
         } else {
+          console.log(result);
           resolve(result[0].count === 0);
         }
       });
@@ -126,14 +140,18 @@ class userDao {
     });
   }
   _getTokenPayload(token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-      if (err) {
-        console.log(err);
-      } else {
-        return decodedToken
-      }
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+        if (err) {
+          reject({ success: false, error: 'invalid token' });
+        } else {
+          decodedToken.success = true
+          resolve(decodedToken);
+        }
+      });
     });
   }
+  
   async _updatePassword(user) {
     return new Promise((resolve, reject) => {
       db.query(userQueries.updatePassword, [user.password, user.email], (err, result) => {

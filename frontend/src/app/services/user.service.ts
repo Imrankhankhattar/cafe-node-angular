@@ -14,4 +14,10 @@ export class UserService {
     return this.httpClient.post(`${this.url}/user/forgot-password`,data,{headers: new HttpHeaders({'Content-Type': 'application/json'})});
 
   }
+  login(data:any){
+    return this.httpClient.post(`${this.url}/user/login`,data,{headers: new HttpHeaders({'Content-Type': 'application/json'})});
+  }
+  validateToken(){
+    return this.httpClient.get(`${this.url}/user/validate-token`);
+  }
 }
