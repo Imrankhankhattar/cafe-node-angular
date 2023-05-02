@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
    const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width="50%";
+    dialogConfig.width="40%";
     this.dialog.open(SignupComponent, dialogConfig);
   }
   forgotPassword(){

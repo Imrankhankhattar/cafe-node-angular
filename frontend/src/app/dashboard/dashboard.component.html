@@ -1,0 +1,42 @@
+<body>
+    <mat-card>
+        <b>
+            <span>Dashboard details</span>
+        </b>
+    </mat-card>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <div class="container">
+                    <h2 class="title">TotalCategory</h2>
+                    <h2 class="title">{{data?.categories}}</h2>
+                    <p>
+                        <button mat-raised-button color="primary" [routerLink]="['cafe/category']">View</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="container">
+                    <h2 class="title">TotalProduct</h2>
+                    <h2 class="title">{{data?.products}}</h2>
+                    <p>
+                        <button mat-raised-button color="primary" [routerLink]="['cafe/product']">View</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="container">
+                    <h2 class="title">Bills</h2>
+                    <h2 class="title">{{data?.billCount}}</h2>
+                    <p>
+                        <button mat-raised-button color="primary" [routerLink]="['cafe/order']">View</button>
+                    </p>
+                </div>
+            </div>
+            </div>
+    </div>
+</body>
