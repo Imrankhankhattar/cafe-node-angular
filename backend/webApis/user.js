@@ -50,7 +50,7 @@ router.post('/get-users', async (req, res) => {
 router.post('/update-password', async (req, res) => {
     try {
         const update = await new resources.UpdateUser().UpdatePassword(req.body);
-        update.success === true ? res.status(200).send(update) : res.status(401).send(update);
+        update.success === true ? res.status(200).send(update) : res.status(409).send(update);
     }
     catch (err) {
     }

@@ -59,16 +59,16 @@ class userDao {
   async UpdatePassword(user) {
     let userData = await this._getUserWithPassword(user.email);
     if (!userData) {
-      return { message: 'Invalid credentials' }
+      return { success:false,message: 'Invalid credentials' }
     }
-    if (comparePasswords(user.oldPassword, userData[0].password)) {
+    let passwordMatch = await comparePasswords(user.oldPassword, userData[0].password);
+    if (passwordMatch) {
       let hashPassword = await getHashPassword(user.newPassword);
       user.password = hashPassword
       const updatedUser = await this._updatePassword(user);
       return updatedUser;
     }
-
-
+    return { success:false,message: 'Incorrect old password' }
   }
   async validateToken(token) {
     try {
