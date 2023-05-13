@@ -20,15 +20,15 @@ const routes: Routes = [
         path: '',
         loadChildren:
           () => import('./material-component/material.module').then(m => m.MaterialComponentsModule),
-          canActivate:[AuthService],
-          data: { expectedRole: ['user', 'admin'] } 
+          // canActivate:[AuthService],
+          // data: { expectedRole: ['user', 'admin'] } 
 
       },
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-        canActivate:[RouteGuardService],
-          data: { expectedRole: ['user', 'admin'] } 
+        // canActivate:[RouteGuardService],
+        //   data: { expectedRole: ['user', 'admin'] } 
       }
     ]
   },

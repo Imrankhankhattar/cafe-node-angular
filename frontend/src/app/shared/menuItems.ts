@@ -12,9 +12,9 @@ const menuItems = [{
     icon: 'av_timer',
     role: 'user'
 }, {
-    state: 'dashboard',
-    name: 'Dashboard',
-    icon: 'av_timer',
+    state: 'category',
+    name: 'Manage Category',
+    icon: 'category',
     role: 'user'
 }]
 
