@@ -31,7 +31,7 @@ router.post('/get', async (req, res) => {
 
 })
 
-router.delete('/delete',async (req,res)=>{
+router.post('/delete',async (req,res)=>{
     try {
         const deleteProduct = await new resources.DeleteProduct().handle(req.body);
         deleteProduct.success === true ? res.status(200).send(deleteProduct) : res.status(409).send(deleteProduct);

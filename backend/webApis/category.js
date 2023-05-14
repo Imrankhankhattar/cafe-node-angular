@@ -28,5 +28,13 @@ router.post('/get', async (req, res) => {
     catch (err) {
     }
 })
+router.post('/delete', async (req, res) => {
+    try {
+        const deleteCategory = await new resources.deleteCategory().handle(req.body);
+        deleteCategory.success === true ? res.status(200).send(deleteCategory) : res.status(409).send(deleteCategory);
+    }
+    catch (err) {
+    }
+});
 
 module.exports = router

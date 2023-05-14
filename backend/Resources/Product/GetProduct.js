@@ -11,8 +11,11 @@ class GetProduct {
             let result = await Dao.getProduct(Data.id);
             return result;
         }
-        let results  = await Dao.getProducts();
-        return results;
+        let products  = await Dao.getProducts();
+        return {
+            success:true,
+            data:products
+        }
     }
 }
 module.exports = GetProduct;

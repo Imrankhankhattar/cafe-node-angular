@@ -6,11 +6,8 @@ class UpdateProduct {
     async handle(Data) {
         if (Data.id && typeof Data.id === 'number' ) {
             const product = new Product(Data, 'update');
-            console.log('====================================',product);
             const productEntity = product.getData();
             const validationErrors = product.validate(productEntity);
-            console.log(validationErrors);
-            console.log('====================================');
             if (validationErrors === null) {
                 productEntity.id = Data.id
                 let result = await Dao.updateProduct(productEntity);

@@ -18,6 +18,17 @@ class categoryDAO {
         const categories = await this._getAll();
         return categories;
     }
+    async deleteCategory(id) {
+        try {
+          await this._deleteProductByCategory(id);
+          const deletedCategory = await this._delete(id);
+          return deletedCategory;
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
+      }
+      
     async _get(name){
         return new Promise(
             (resolve, reject) => {
@@ -35,6 +46,19 @@ class categoryDAO {
         return new Promise(
             (resolve, reject) => {
                 db.query(categoryQueries.getCategories, (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                })
+            }
+        )
+    }
+    async _deleteProductByCategory(id){
+        return new Promise(
+            (resolve, reject) => {
+                db.query(categoryQueries.deleteProductsByCategory, [id], (err, result) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -73,6 +97,19 @@ class categoryDAO {
         return new Promise(
             (resolve, reject) => {
                 db.query(query, values, (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                })
+            }
+        )
+    }
+    async _delete(id){
+        return new Promise(
+            (resolve, reject) => {
+                db.query(categoryQueries.deleteCategory, [id], (err, result) => {
                     if (err) {
                         reject(err);
                     } else {

@@ -73,4 +73,18 @@ export class CategoryComponent implements OnInit {
       this.snackbarService.openSnackBar(this.responseMessage, 'error');
     })
   }
+  delete(){
+    let data = {
+      id:this.dialogData.data.id
+    }
+    this.categoryService.delete(data).subscribe((res:any)=>{
+      this.responseMessage = res.message;
+      this.snackbarService.openSnackBar(this.responseMessage, 'success');
+      this.onDeleteCategory.emit();
+      this.dialogRef.close();
+    },(error:any)=>{
+      this.responseMessage = error.error.message;
+      this.snackbarService.openSnackBar(this.responseMessage, 'error');
+    })
+  }
 }

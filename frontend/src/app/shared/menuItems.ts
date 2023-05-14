@@ -10,12 +10,17 @@ const menuItems = [{
     state: 'dashboard',
     name: 'Dashboard',
     icon: 'av_timer',
-    role: 'user'
+    role: ''
 }, {
     state: 'category',
     name: 'Manage Category',
     icon: 'category',
-    role: 'user'
+    role: 'admin'
+}, {
+    state: 'product',
+    name: 'Manage Product',
+    icon: 'inventory_2',
+    role: 'admin'
 }]
 
 @Injectable()

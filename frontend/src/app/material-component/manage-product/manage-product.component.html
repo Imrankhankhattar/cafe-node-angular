@@ -1,8 +1,10 @@
 <mat-card>
-    <b><span>Manage Category</span></b>
+    <b><span>Manage Product</span></b>
     <button mat-button color="primary" class="float-right" (click)="handleAdd()">Add Category</button>
 
 </mat-card>
+
+<hr>
 
 <mat-card>
     <mat-form-field appearance="fill">
@@ -10,17 +12,31 @@
         <input matInput (keyup)="filter($event)" placeholder="Search" #search>
     </mat-form-field>
 </mat-card>
+
 <div class="responsive_table">
     <table mat-table [dataSource]="dataSource" class="mat-elvation-z8" style="width:100%">
         <ng-container matColumnDef='name'>
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
+        <ng-container matColumnDef='description'>
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+        <ng-container matColumnDef='categoryName'>
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+        </ng-container>
+        <ng-container matColumnDef='price'>
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
         <ng-container matColumnDef='edit'>
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element" class="action-link" class="actions">
                 <a (click)="handleEdit(element)" matTooltip="Edit"><mat-icon>edit</mat-icon></a>
                 <a (click)="handleDelete(element)" matTooltip="Delete"><mat-icon>delete</mat-icon></a>
+                <mat-slide-toggle (change)="onChange($event.checked,element.id)" [checked]="element.status" matTooltip="{{element.status === 'true' ? 'Deactivate':'Activate'}}"></mat-slide-toggle>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumn; sticky: true"></tr>

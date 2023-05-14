@@ -18,4 +18,7 @@ export class CategoryService {
   get(data: any = {}) {
     return this.httpClient.post(`${this.url}/category/get`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
+  delete(data: any) {
+    return this.httpClient.post(`${this.url}/category/delete`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+  }
 }
