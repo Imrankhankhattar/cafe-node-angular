@@ -17,6 +17,7 @@ import { RouteGuardService } from '../services/route-gaurd.service';
 import { CategoryComponent } from './dialog/category/category.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
 import { ProductComponent } from './dialog/product/product.component';
+import { MaangeOrderComponent } from './maange-order/maange-order.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { ProductComponent } from './dialog/product/product.component';
     ManageCategoryComponent,
     CategoryComponent,
     ManageProductComponent,
-    ProductComponent    
+    ProductComponent,
+    MaangeOrderComponent    
   ]
 })
 export class MaterialComponentsModule {}

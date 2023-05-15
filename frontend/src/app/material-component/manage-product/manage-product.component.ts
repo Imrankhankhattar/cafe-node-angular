@@ -95,5 +95,16 @@ export class ManageProductComponent implements OnInit {
     })
   }
   onChange(status:any,id:any){
+    this.ngxService.start();
+    const data = {
+      id : parseFloat(id),
+      status : status.checked
+    }
+    this.productService.update(data).subscribe((res:any)=>{
+      this.responseMessage = res.message;
+      this.snackbarService.openSnackBar('Product status updated', 'success');
+      this.getData();
+    })
+    this.ngxService.stop();
   }
 }

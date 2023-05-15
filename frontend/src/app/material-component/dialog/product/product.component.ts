@@ -31,9 +31,9 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
       name: [null,Validators.required],
-      categoryId:[null,Validators.required],
       description: [null,Validators.required],
       price:[null,Validators.required],
+      categoryId:[null,Validators.required],
     });
     if(this.dialogData.action === 'Edit'){
       this.productForm.patchValue(this.dialogData.data);
@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit {
       description:formData.description,
       price:formData.price,
       categoryId:formData.categoryId,
-      status:true
+      status:false
     }
     
     this.productService.add(data).subscribe((res:any)=>{

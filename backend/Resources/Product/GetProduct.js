@@ -5,11 +5,17 @@ class GetProduct {
     async handle(Data) {
         if(Data.categoryId){
             let result = await Dao.getCategoryProducts(Data.categoryId);
-            return result;
+            return {
+                success:true,
+                data:result
+            }
         }
-        if(Data.id){
-            let result = await Dao.getProduct(Data.id);
-            return result;
+        if(Data.productId){
+            let result = await Dao.getProduct(Data.productId);
+            return {
+                success:true,
+                data:result
+            }
         }
         let products  = await Dao.getProducts();
         return {

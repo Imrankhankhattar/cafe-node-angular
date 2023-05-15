@@ -4,6 +4,7 @@ import { ManageCategoryComponent } from './manage-category/manage-category.compo
 import { AuthService } from '../services/auth.service';
 import { RouteGuardService } from '../services/route-gaurd.service';
 import { ManageProductComponent } from './manage-product/manage-product.component';
+import { MaangeOrderComponent } from './maange-order/maange-order.component';
 
 
 
@@ -15,5 +16,9 @@ export const MaterialRoutes: Routes = [
     {
         path: 'product',
         component:ManageProductComponent
+    },
+    {
+        path: 'order',
+        component:MaangeOrderComponent
     }
 ];
