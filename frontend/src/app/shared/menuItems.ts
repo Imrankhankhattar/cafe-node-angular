@@ -26,7 +26,20 @@ const menuItems = [{
     name: 'Manage Order',
     icon: 'list_alt',
     role: ''
-}]
+},
+{
+    state: 'bill',
+    name: 'Manage Bill',
+    icon: 'import_contacts',
+    role: ''
+},
+{
+    state: 'user',
+    name: 'Manage User',
+    icon: 'people',
+    role: ''
+}
+]
 
 @Injectable()
 export class MenuItems {

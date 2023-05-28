@@ -15,4 +15,13 @@ export class BillService {
   getPdf(data: any = {}):Observable<Blob> {
     return this.httpClient.post(`${this.url}/bill/getBill`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }),responseType:'blob' });
   }
+  
+  getBills(data: any = {}) {
+    return this.httpClient.post(`${this.url}/bill/getBills`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+  }
+  
+  deleteBill(id:any) {
+    return this.httpClient.delete(`${this.url}/bill/delete/`+id,{ headers: new HttpHeaders({ 'Content-Type': 'application/json' })});
+  }
+  
 }

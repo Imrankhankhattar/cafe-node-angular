@@ -4,10 +4,12 @@ class UpdateUser {
     constructor() {
     }
     async handle(Data) {
-        if (Data.email) {
+        console.log(Data);
+        if (Data.id) {
             const user = new User(Data, 'update');
             const userEntity = user.getData();
             const validationErrors = user.validate(userEntity);
+            console.log(validationErrors);
             if (validationErrors === null) {
                 let result = await userDao.updateUser(Data)
                 return result.affectedRows === 1 ?

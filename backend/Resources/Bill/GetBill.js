@@ -6,7 +6,11 @@ class GetBill {
             return res
         }
         let res = await Dao.getBills();
-        return res
+        return {
+            success: true,
+            message: "Bills fetched successfully",
+            data: res
+        }
     }
 }
 module.exports = GetBill;

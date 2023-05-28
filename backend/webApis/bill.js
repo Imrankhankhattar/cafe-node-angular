@@ -38,7 +38,7 @@ router.post('/getBills',async (req,res)=>{
     try{
         req.body = {}
         const getBills = await  new resources.getBill().handle(req.body);
-        getBills.success === true ? res.status(200).send(getBills) : res.status(409).send(getBills);
+        getBills.success === true ? res.status(200).send(getBills) : res.status(200).send(getBills);
     }catch(err){
 
     }

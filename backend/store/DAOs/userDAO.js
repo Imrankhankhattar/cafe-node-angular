@@ -44,7 +44,7 @@ class userDao {
     }
   }
   async updateUser(user) {
-    const updatedUser = await this._updateUserByEmail(user);
+    const updatedUser = await this._updateUserById(user);
     return updatedUser;
   }
   async getUsers(role) {
@@ -161,19 +161,19 @@ class userDao {
       });
     });
   }
-  async _updateUserByEmail(user) {
+  async _updateUserById(user) {
     let query = `UPDATE user SET `;
     let fields = [];
     let values = [];
     for (let key in user) {
-      if (key !== 'email') {
+      if (key !== 'id') {
         fields.push(`${key} = ?`);
         values.push(user[key]);
       }
     }
     query += fields.join(', ');
-    query += ` WHERE email = ?`;
-    values.push(user.email);
+    query += ` WHERE id = ?`;
+    values.push(user.id);
     return new Promise((resolve, reject) => {
       db.query(query, values, (err, result) => {
         if (err) {

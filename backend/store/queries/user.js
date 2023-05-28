@@ -5,7 +5,7 @@ const getUserByEmail =   `SELECT email,status,role FROM user WHERE email = ?`
 const getUserWithPassword = `SELECT email,password,status,role FROM user WHERE email = ?`
 const updatePassword = `UPDATE user SET password = ? WHERE email = ?`
 const updateUserByEmail = `UPDATE user SET name = ?,status = ?, contact = ?, role = ? WHERE email = ?`
-const getUsers = `SELECT user.name,user.email,user.status,user.contact,user.role FROM user WHERE user.role = ?`
+const getUsers = `SELECT id,user.name,user.email,user.status,user.contact,user.role FROM user WHERE user.role = ?`
 module.exports = {
     checkUniqueEmail,
     addUser,

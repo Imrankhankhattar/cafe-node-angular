@@ -23,4 +23,10 @@ export class UserService {
   changePassword(data:any){
     return this.httpClient.post(`${this.url}/user/update-password`,data,{headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
+  getUsers(data:any={}){
+    return this.httpClient.post(`${this.url}/user/get-users`,data,{headers: new HttpHeaders({'Content-Type': 'application/json'})});
+  }
+  update(data:any={}){
+    return this.httpClient.post(`${this.url}/user/update`,data,{headers: new HttpHeaders({'Content-Type': 'application/json'})});
+  }
 }
