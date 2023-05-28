@@ -55,9 +55,9 @@ export class MaangeOrderComponent implements OnInit {
       // this.snackbarService.openSnackBar(this.responseMessage, 'error');
     });
   }
-  getProducts(value: any) {
+  getProducts(category: any) {
     let data = {
-      categoryId: parseFloat(value)
+      categoryId: parseFloat(category.id)
     }
     this.productService.get(data).subscribe((res: any) => {
       this.products = res.data;
@@ -94,17 +94,14 @@ export class MaangeOrderComponent implements OnInit {
     return false;
   }
   validateSubmit() {
-    if (this.orderForm.controls['name'].value == null || this.orderForm.controls['name'].value == '' ||
-      this.orderForm.controls['email'].value == null || this.total == 0 ||
-      this.orderForm.controls['contact'].value == null || this.orderForm.controls['contact'].value == '' ||
-      this.orderForm.controls['paymentMethod'].value == null || this.orderForm.controls['paymentMethod'].value == '',
-      this.orderForm.controls['product'].value == null) {
-      this.responseMessage = 'Please fill all the fields';
-      // this.snackbarService.openSnackBar(this.responseMessage, 'error');
-      return false;
+    const { name, email, contact, paymentMethod, product } = this.orderForm.controls;
+    if (!name.value || !email.value || !contact.value || !paymentMethod.value || !product.value || this.total === 0) {
+      return true;
     }
-    return true;
+    
+    return false;
   }
+  
   add() {
     let formData = this.orderForm.value;
     let product = this.dataSource.find((e: { id: any; }) => e.id == formData.product.id)
@@ -128,25 +125,26 @@ export class MaangeOrderComponent implements OnInit {
     }
   }
   delete(element: any) {
-    this.total += element.total;
+    this.total -= element.total;
     this.dataSource = this.dataSource.filter((e: { id: any; }) => e.id != element.id);
     this.dataSource = [...this.dataSource]
     this.snackbarService.openSnackBar('Product removed!', 'success');
   }
   submit() {
-    if (this.validateSubmit()) {
+    if (!this.validateSubmit()) {
       this.ngxService.start();
+      
       let data = {
         name: this.orderForm.controls['name'].value,
         email: this.orderForm.controls['email'].value,
         contact: this.orderForm.controls['contact'].value,
         paymentMethod: this.orderForm.controls['paymentMethod'].value,
-        total: this.total,
-        products: JSON.stringify(this.dataSource)
+        totalAmount: this.total,
+        items: this.dataSource
       }
       this.billService.generateReport(data).subscribe((res: any) => {
         this.responseMessage = res.message;
-        this.download(res.uuid);
+        this.download(res.uuid.split(".")[0]);
         this.snackbarService.openSnackBar(this.responseMessage, 'success');
         this.orderForm.reset();
         this.dataSource = [];

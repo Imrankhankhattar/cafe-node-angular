@@ -44,7 +44,6 @@ class userDao {
     }
   }
   async updateUser(user) {
-    console.log(user);
     const updatedUser = await this._updateUserByEmail(user);
     return updatedUser;
   }
@@ -122,7 +121,6 @@ class userDao {
         if (err) {
           reject(err);
         } else {
-          console.log(result);
           resolve(result[0].count === 0);
         }
       });

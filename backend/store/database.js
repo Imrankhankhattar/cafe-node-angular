@@ -22,19 +22,13 @@ const executeTransaction = (functions) => {
                             throw err;
                         });
                     }
-
-                    console.log('Transaction committed successfully!');
                     connection.end();
                 });
             } else {
                 const func = functions[index];
                 const values = results ? results : [];
-                console.log('====================================');
-                console.log(func);
-                console.log('====================================');
                 func(connection, ...values).then((res) => {
                     const allResults = [...values, res];
-                    console.log(`Function ${index + 1} executed successfully!`, allResults);
                     executeNextFunction(index + 1, allResults);
                 }).catch((err) => {
                     return connection.rollback(() => {

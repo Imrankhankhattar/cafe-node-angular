@@ -21,8 +21,6 @@ export class UserService {
     return this.httpClient.get(`${this.url}/user/validate-token`);
   }
   changePassword(data:any){
-    console.log('====================================');
-    console.log(data);
     return this.httpClient.post(`${this.url}/user/update-password`,data,{headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 }

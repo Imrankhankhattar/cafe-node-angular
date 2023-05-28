@@ -13,6 +13,7 @@ class billDao {
         data.uuid = uuid.v4();
         let add = await this._addBill(data);
         if (add.affectedRows > 0) {
+            data.items = JSON.parse((data.items))
             return await this._makePdf(data);
         }
         return {
@@ -23,7 +24,7 @@ class billDao {
     }
     async getBill(uuid) {
         const pdfPath = path.resolve(__dirname, `../../utils/bills/${uuid}.pdf`)
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (fs.existsSync(pdfPath)) {
                 resolve({
                     success: true,
@@ -88,10 +89,12 @@ class billDao {
         )
     }
     _addBill(data) {
+        console.log(data.items);
         return new Promise(
             (resolve, reject) => {
                 db.query(billQueries.add, [data.uuid, data.name, data.email, data.contact, data.paymentMethod, data.totalAmount, data.items], (err, result) => {
                     if (err) {
+                        console.log(err);
                         reject(err);
                     } else {
                         resolve(result);

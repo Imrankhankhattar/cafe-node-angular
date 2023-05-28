@@ -10,7 +10,6 @@ class UpdateUser {
             const validationErrors = user.validate(userEntity);
             if (validationErrors === null) {
                 let result = await userDao.updateUser(Data)
-                console.log('result', result);
                 return result.affectedRows === 1 ?
                     { success: true, message: "User updated successfully" } :
                     { success: false, message: result.message }

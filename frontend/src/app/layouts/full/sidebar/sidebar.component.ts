@@ -24,9 +24,6 @@ export class AppSidebarComponent implements OnDestroy {
   }
   ngOnInit(): void {
     this.tokenPayload = jwt_decode(this.token);
-    console.log('====================================');
-    console.log(this.tokenPayload);
-    console.log('====================================');
   }
 
   ngOnDestroy(): void {

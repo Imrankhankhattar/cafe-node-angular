@@ -47,3 +47,5 @@ Thumbs.db
 # bcrypt.js
 nodemailer.js
 *.sql
+
+*.pdf

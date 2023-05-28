@@ -13,6 +13,6 @@ export class BillService {
     return this.httpClient.post(`${this.url}/bill/generateBill`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
   getPdf(data: any = {}):Observable<Blob> {
-    return this.httpClient.post(`${this.url}/bill/getBills`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }),responseType:'blob' });
+    return this.httpClient.post(`${this.url}/bill/getBill`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }),responseType:'blob' });
   }
 }

@@ -7,7 +7,6 @@ class productDAO {
         return addedProduct;
     }
     async updateProduct(product) {
-        console.log('product');
         const updatedProduct = await this._update(product);
         return updatedProduct;
     }
